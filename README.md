@@ -1,5 +1,5 @@
- kubectl create deployment todo-app --image=eplol/todo-app:0.3
+kubectl apply -f manifests/deployment.yaml
 
- kubectl get logs todo-app
+kubectl apply -f manifests/service.yaml
 
- kubectl port-forward todo-app-659dfcb5f4-l225z 8000:8000
+accessible from http://localhost:8082/
