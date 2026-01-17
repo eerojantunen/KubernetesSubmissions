@@ -1,1 +1,3 @@
-log-output has relevant files
+run:
+
+kubectl apply -f manifests
