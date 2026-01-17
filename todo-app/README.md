@@ -1,5 +1,1 @@
-kubectl apply -f manifests/deployment.yaml
-
-kubectl apply -f manifests/service.yaml
-
-accessible from http://localhost:8082/
+log-output has relevant files

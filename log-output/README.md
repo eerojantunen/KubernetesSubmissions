@@ -1,2 +1,2 @@
 run:
-# `kubectl apply -f deployment.yaml`
+# `kubectl apply -f manifests`
