@@ -4,4 +4,7 @@ devops with kubernetes course submissions
 Submissions:
 
 [1.1](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.1/)
+
 [1.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.2/)
+
+[1.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.3/)
