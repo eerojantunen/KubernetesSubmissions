@@ -1,7 +1,7 @@
-Relevant files for 1.11 are in log-output, folders log-getter and log-writer and in folder ping-pong
+Relevant files for 1.12 are in todo-app
 
 run
 
 kubectl apply -f manifests
 
-in log-output and ping-pong
+in todo-app

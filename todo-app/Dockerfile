@@ -1,6 +1,6 @@
 FROM python:3.13-slim
 
-WORKDIR /myapp
+WORKDIR /mydir
 
 COPY requirements.txt .
 COPY todo_app.py .

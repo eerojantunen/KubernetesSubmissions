@@ -12,9 +12,16 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: project-image-claim
       containers:
         - name: todo-app
-          image: eplol/todo-app:0.3
+          image: eplol/todo-app:1.2
+          volumeMounts:
+          - name: shared-image
+            mountPath: /mydir/shared/files
           env:
           - name: PORT
             value: "8000"
