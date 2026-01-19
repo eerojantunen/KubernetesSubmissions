@@ -12,9 +12,16 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: ping-pong
-          image: eplol/ping-pong:0.6
+          image: eplol/ping-pong:1.2
+          volumeMounts:
+          - name: shared-image
+            mountPath: /mydir/shared/files
           env:
           - name: "PORT"
             value: "3000"

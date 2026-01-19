@@ -14,21 +14,22 @@ spec:
     spec:
       volumes:
         - name: shared-image
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: log-writer
-          image: eplol/log-writer:0.3
+          image: eplol/log-writer:1.1
           volumeMounts:
           - name: shared-image
-            mountPath: /mydir/files
+            mountPath: /mydir/shared/files
           env:
           - name: "PORT"
             value: "3000"
         - name: log-getter
-          image: eplol/log-getter:0.1
+          image: eplol/log-getter:1.2
           volumeMounts:
           - name: shared-image
-            mountPath: /mydir/files
+            mountPath: /mydir/shared/files
           env:
           - name: "PORT"
             value: "3000"

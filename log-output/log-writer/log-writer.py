@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import time
 
-directory = os.path.join('files')
+directory = os.path.join('shared','files')
 filePath = os.path.join(directory, 'log.txt')
 os.makedirs(directory, exist_ok=True)
 
