@@ -12,9 +12,23 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-image
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: eplol/log-output:0.2
+        - name: log-writer
+          image: eplol/log-writer:0.3
+          volumeMounts:
+          - name: shared-image
+            mountPath: /mydir/files
+          env:
+          - name: "PORT"
+            value: "3000"
+        - name: log-getter
+          image: eplol/log-getter:0.1
+          volumeMounts:
+          - name: shared-image
+            mountPath: /mydir/files
           env:
           - name: "PORT"
             value: "3000"
