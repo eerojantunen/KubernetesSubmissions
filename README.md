@@ -1,7 +1,7 @@
-Relevant files for 1.9 are in log-output and ping-pong
+Relevant files for 1.10 are in log-output, folders log-getter and log-writer
 
 run
 
 kubectl apply -f manifests
 
-in both folders
+in log-output
