@@ -27,3 +27,4 @@ Submissions:
 
 [1.12](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.12/)
 
+[1.13](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.13/)
