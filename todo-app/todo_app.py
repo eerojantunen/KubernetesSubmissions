@@ -24,6 +24,15 @@ def download_image():
     with open(time_filePath, "w") as f:
         f.write(datetime.now().isoformat())
 
+def get_todos():
+    todos = ["Learn JacaScript", "Learn React", "Build a project"]
+
+    todo_list_html = ""
+
+    for todo in todos:
+        todo_list_html += f"<li>{todo}</li>"
+    return todo_list_html
+
 @app.get("/", response_class=HTMLResponse)
 async def root():
 
@@ -35,13 +44,20 @@ async def root():
             time_last = datetime.fromisoformat(f.read())
         if (datetime.now() - time_last).total_seconds() > 600:
             download_image()
-            
-    return """
+
+
+    return f"""
     <html>
         <body>
             <h1>The project App</h1>
             <img src="/static/image.jpg" style="max-width: 500px;">
+            <form>
+                <input type="text" name="todo" maxlength="140" required>
+                <button type="submit">Create todo</button>
+            </form>
+            {get_todos()}
             <p>DevOps with Kubernetes 2025<p>
+
         </body>
     </html>
     """

@@ -18,7 +18,7 @@ spec:
             claimName: project-image-claim
       containers:
         - name: todo-app
-          image: eplol/todo-app:1.2
+          image: eplol/todo-app:1.6
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
