@@ -25,11 +25,11 @@ def download_image():
         f.write(datetime.now().isoformat())
 
 def get_todos():
-    todos = ["Learn JacaScript", "Learn React", "Build a project"]
+    todos_list = requests.get("http://todo-backend-svc:2347/todos").json()
 
     todo_list_html = ""
 
-    for todo in todos:
+    for todo in todos_list:
         todo_list_html += f"<li>{todo}</li>"
     return todo_list_html
 
@@ -51,7 +51,7 @@ async def root():
         <body>
             <h1>The project App</h1>
             <img src="/static/image.jpg" style="max-width: 500px;">
-            <form>
+            <form action="/todos" method="POST">
                 <input type="text" name="todo" maxlength="140" required>
                 <button type="submit">Create todo</button>
             </form>
