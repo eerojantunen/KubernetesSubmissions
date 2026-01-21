@@ -16,6 +16,9 @@ spec:
       volumes:
         - name: shared-image
           emptyDir: {}
+        - name: config
+          configMap:
+            name: log-configmap
       containers:
         - name: log-writer
           image: eplol/log-writer:1.1
@@ -26,10 +29,17 @@ spec:
           - name: "PORT"
             value: "3000"
         - name: log-getter
-          image: eplol/log-getter:2.2
+          image: eplol/log-getter:2.4
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
+          - name: config
+            mountPath: "/config"
           env:
           - name: "PORT"
             value: "3000"
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-configmap
+                key: MESSAGE
