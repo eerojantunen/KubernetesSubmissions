@@ -14,11 +14,10 @@ spec:
     spec:
       volumes:
         - name: shared-image
-          persistentVolumeClaim:
-            claimName: image-claim
+          emptyDir: {}
       containers:
         - name: ping-pong
-          image: eplol/ping-pong:1.2
+          image: eplol/ping-pong:2.1
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
