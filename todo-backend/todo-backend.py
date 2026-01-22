@@ -11,9 +11,8 @@ directory = os.path.join('shared','files')
 
 port = int(os.getenv("PORT", 8000))
 
-
 todo_list = ["Learn JacaScript", "Learn React", "Build a project"]
-
+redirect_url = os.getenv("REDIRECT_URL")
 
 @app.get("/todos")
 async def get_todos():
@@ -26,7 +25,7 @@ async def post_todos(request: Request):
     data = await request.form()
     todo = data.get("todo")
     todo_list.append(todo)
-    return RedirectResponse(url="/", status_code=303)
+    return RedirectResponse(url=redirect_url, status_code=303)
 
 
 uvicorn.run(app, host="0.0.0.0", port=port)

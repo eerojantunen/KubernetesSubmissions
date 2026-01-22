@@ -17,15 +17,18 @@ app.mount("/static", StaticFiles(directory=directory), name="static")
 
 port = int(os.getenv("PORT", 8000))
 
+env_url = os.getenv("PICSUM_URL")
+todos_url = os.getenv("TODOS_URL")
+
 def download_image():
-    response = requests.get("https://picsum.photos/1200")    
+    response = requests.get(env_url)    
     with open(img_filePath, "wb") as f:
         f.write(response.content)
     with open(time_filePath, "w") as f:
         f.write(datetime.now().isoformat())
 
 def get_todos():
-    todos_list = requests.get("http://todo-backend-svc:2347/todos").json()
+    todos_list = requests.get(todos_url).json()
 
     todo_list_html = ""
 

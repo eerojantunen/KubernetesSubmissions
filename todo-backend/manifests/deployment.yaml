@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-backend
-  namespace: exercises
+  namespace: project
 spec:
   replicas: 1
   selector:
@@ -19,3 +19,8 @@ spec:
           env:
           - name: PORT
             value: "8000"
+          - name: REDIRECT_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: REDIRECT_URL

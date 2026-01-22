@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-app
-  namespace: exercises
+  namespace: project
 spec:
   replicas: 1
   selector:
@@ -26,3 +26,13 @@ spec:
           env:
           - name: PORT
             value: "8000"
+          - name: PICSUM_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: PICSUM_URL
+          - name: TODOS_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: TODOS_URL
