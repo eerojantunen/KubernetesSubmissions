@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: eplol/todo-backend:1.4
+          image: eplol/todo-backend:2.3
           env:
           - name: PORT
             value: "8000"
@@ -24,3 +24,8 @@ spec:
               configMapKeyRef:
                 name: project-configmap
                 key: REDIRECT_URL
+          - name: DB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: DB_URL
