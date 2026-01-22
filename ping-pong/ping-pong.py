@@ -3,24 +3,30 @@ from random import choices
 import string
 from datetime import datetime
 import os
+from sqlalchemy import create_engine, text
 
 app = FastAPI()
 
-pong_counter = 0
 directory = os.path.join('shared','files')
 filePathPong = os.path.join(directory, 'pingpong.txt')
+db_url = "postgresql://postgres:pass123@postgres-svc:5432/postgres"
 
+engine = create_engine(db_url)
+with engine.connect() as conn:
+    conn.execute(text(
+        "CREATE TABLE IF NOT EXISTS counter (id INT PRIMARY KEY, value INT)"))
+    conn.execute(text(
+        "INSERT INTO counter (id, value) VALUES (1, 0) ON CONFLICT DO NOTHING"))
+    conn.commit()
 
 def handle_pingpong():
-    global pong_counter
-    pong_counter += 1
-    try:
-        with open(filePathPong, "w") as f:
-            f.write(str(pong_counter))
-    except Exception as e:
-        return str(e) + "HELLO"
-    return pong_counter
-
+    with engine.connect() as conn:
+        result = conn.execute(text(
+            "UPDATE counter SET value = value + 1 WHERE id = 1 RETURNING value"
+        ))
+        count = result.fetchone()[0]
+        conn.commit()
+        return count
 
 @app.get("/pings")
 def pings():

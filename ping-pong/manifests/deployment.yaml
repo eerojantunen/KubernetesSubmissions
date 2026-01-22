@@ -18,7 +18,7 @@ spec:
           emptyDir: {}
       containers:
         - name: ping-pong
-          image: eplol/ping-pong:2.1
+          image: eplol/ping-pong:2.2
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
