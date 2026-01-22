@@ -45,5 +45,6 @@ Part 2:
 
 [2.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.5/)
 
+[2.6](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.6/)
 
 
