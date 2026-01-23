@@ -28,7 +28,11 @@ def handle_pingpong():
         conn.commit()
         return count
 
-@app.get("/pings")
+@app.get("/")
+def root():
+    return "OK"
+
+@app.get("/pingpong/pings")
 def pings():
     pong_counter = handle_pingpong()
     return f"{pong_counter}"

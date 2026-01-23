@@ -9,6 +9,10 @@ filePath = os.path.join(directory, 'log.txt')
 config = os.path.join('config')
 #filePathPong = os.path.join(directory, 'pingpong.txt')
 
+@app.get("/")
+def root():
+    return "OK"
+
 @app.get("/status")
 def status():
 
@@ -18,7 +22,7 @@ def status():
             content = f.read()
         with open("/config/information.txt", "r") as f:
             file_content = f.read().strip()
-        pong = requests.get("http://ping-pong-svc:2346/pings").text
+        pong = requests.get("http://ping-pong-svc:2346/pingpong/pings").text
         result = (
                  f"file content: {file_content}\n"
                  f"env variable: MESSAGE={env_message}\n"
