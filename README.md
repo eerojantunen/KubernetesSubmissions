@@ -4,4 +4,4 @@ run
 
 kubectl apply -f manifests
 
-in todo-app
+in todo-app 
