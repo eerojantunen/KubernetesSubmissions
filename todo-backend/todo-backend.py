@@ -27,7 +27,7 @@ def init_db():
                 AND table_name = 'todos'
             );
         """)).scalar()
-        
+
         if not exists:
             conn.execute(text(
                 "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT)"))
@@ -53,13 +53,18 @@ async def get_todos():
 async def post_todos(request: Request):
     data = await request.form()
     todo = data.get("todo")
+    if len(todo) > 140:
+        print("Todo is over 140 characters, rejected")
+        print(f"Rejected todo: {todo}")
+        return RedirectResponse(url=redirect_url, status_code=303)
+    print(f"Recieved valid todo {todo}")
     with engine.connect() as conn:
         conn.execute(
             text("INSERT INTO todos (todo) VALUES (:todo)"),
             {"todo": todo}
         )
         conn.commit()
-
+    print(f"todo: {todo} added to database")
     return RedirectResponse(url=redirect_url, status_code=303)
 
 
