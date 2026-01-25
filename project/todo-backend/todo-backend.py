@@ -40,6 +40,10 @@ def init_db():
 
 init_db()
 
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+
 @app.get("/todos")
 async def get_todos():
     with engine.connect() as conn:
