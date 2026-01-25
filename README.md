@@ -65,3 +65,5 @@ Part 3:
 [3.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.3/)
 
 [3.4](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.4/)
+
+[3.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.5/)
