@@ -7,4 +7,4 @@ gcloud container clusters create dwk-cluster \
 
 (I had issues with --machine-type=e2-micro so I changed to medium)
 
-kubectl apply -k
+kubectl apply -k .
