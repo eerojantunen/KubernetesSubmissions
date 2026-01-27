@@ -21,7 +21,7 @@ spec:
             claimName: project-image-claim
       containers:
         - name: todo-app
-          image: todo-app-image
+          image: eplol/todo-app:4.1
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
@@ -38,10 +38,22 @@ spec:
               configMapKeyRef:
                 name: project-configmap
                 key: TODOS_URL
-          resources:
-            requests:
-              cpu: "50m"
-              memory: "64Mi"
-            limits:
-              cpu: "150m"
-              memory: "128Mi"
+          - name: TODOS_HEALTH_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: TODOS_HEALTH_URL
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000
+            
+          #resources:
+          #  requests:
+          #    cpu: "50m"
+          #    memory: "64Mi"
+          #  limits:
+          #    cpu: "150m"
+          #    memory: "128Mi"

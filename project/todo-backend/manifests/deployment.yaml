@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: todo-backend-image
+          image: eplol/todo-backend:4.2
           env:
           - name: PORT
             value: "8000"
@@ -31,10 +31,16 @@ spec:
               configMapKeyRef:
                 name: project-configmap
                 key: DB_URL
-          resources:
-            requests:
-              cpu: "50m"
-              memory: "64Mi"
-            limits:
-              cpu: "200m"
-              memory: "256Mi"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8000
+          #resources:
+          #  requests:
+          #    cpu: "50m"
+          #    memory: "64Mi"
+          #  limits:
+          #    cpu: "200m"
+          #    memory: "256Mi"

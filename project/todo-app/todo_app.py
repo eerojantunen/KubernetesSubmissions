@@ -1,7 +1,7 @@
 import os
 import uvicorn
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from datetime import datetime
 import requests
 from fastapi.staticfiles import StaticFiles
@@ -19,6 +19,7 @@ port = int(os.getenv("PORT", 8000))
 
 env_url = os.getenv("PICSUM_URL")
 todos_url = os.getenv("TODOS_URL")
+todos_health_url = os.getenv("TODOS_HEALTH_URL")
 
 def download_image():
     response = requests.get(env_url)    
@@ -35,6 +36,16 @@ def get_todos():
     for todo in todos_list:
         todo_list_html += f"<li>{todo}</li>"
     return todo_list_html
+
+@app.get("/healthz")
+def healthz():
+    try:
+        todo_status = requests.get(todos_health_url, timeout=2).status_code
+    except Exception:
+        return Response(status_code=500)
+    if todo_status == 200:
+        return Response(status_code=200)
+    return Response(status_code=500)
 
 @app.get("/", response_class=HTMLResponse)
 async def root():

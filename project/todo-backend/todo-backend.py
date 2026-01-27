@@ -1,7 +1,7 @@
 import os
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, Response
 from datetime import datetime
 import requests
 from sqlalchemy import create_engine, text
@@ -19,26 +19,40 @@ redirect_url = os.getenv("REDIRECT_URL")
 engine = create_engine(DB_URL)
 
 def init_db():
-    with engine.connect() as conn:
-        exists = conn.execute(text("""
-            SELECT EXISTS (
-                SELECT FROM information_schema.tables 
-                WHERE table_schema = 'public' 
-                AND table_name = 'todos'
-            );
-        """)).scalar()
+    try:
+        with engine.connect() as conn:
+            exists = conn.execute(text("""
+                SELECT EXISTS (
+                    SELECT FROM information_schema.tables 
+                    WHERE table_schema = 'public' 
+                    AND table_name = 'todos'
+                );
+            """)).scalar()
 
-        if not exists:
-            conn.execute(text(
-                "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT)"))
-            conn.commit()
-            for todo in todo_list:
-                conn.execute(
-                    text("INSERT INTO todos (todo) VALUES (:todo) ON CONFLICT DO NOTHING"),
-                    {"todo": todo})        
+            if not exists:
+                conn.execute(text(
+                    "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT)"))
                 conn.commit()
+                for todo in todo_list:
+                    conn.execute(
+                        text("INSERT INTO todos (todo) VALUES (:todo) ON CONFLICT DO NOTHING"),
+                        {"todo": todo})        
+                    conn.commit()
+    except Exception:
+        pass
 
-init_db()
+@app.on_event("startup")
+def startup_event():
+    init_db()
+
+@app.get("/healthz")
+def healthz():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text('SELECT 1'))
+        return Response(status_code=200)
+    except Exception:
+        return Response(status_code=500)
 
 @app.get("/")
 async def root():
