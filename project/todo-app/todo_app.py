@@ -60,8 +60,6 @@ async def root():
             </form>
             {get_todos()}
             <p>DevOps with Kubernetes 2025<p>
-            <p>automatic deployment test!<p>
-
         </body>
     </html>
     """
