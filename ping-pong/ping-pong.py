@@ -31,6 +31,7 @@ def handle_pingpong():
 
 @app.get("/healthz")
 def healthz():
+
     try:
         with engine.connect() as conn:
             conn.execute(text('SELECT 1'))
