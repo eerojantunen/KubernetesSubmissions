@@ -29,7 +29,7 @@ spec:
           - name: "PORT"
             value: "3000"
         - name: log-getter
-          image: eplol/log-getter:3.1
+          image: eplol/log-getter:3.2
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
@@ -43,3 +43,9 @@ spec:
               configMapKeyRef:
                 name: log-configmap
                 key: MESSAGE
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000

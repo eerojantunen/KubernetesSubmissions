@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import Response
 import os
 import requests
 
@@ -8,6 +9,16 @@ directory = os.path.join('shared','files')
 filePath = os.path.join(directory, 'log.txt')
 config = os.path.join('config')
 #filePathPong = os.path.join(directory, 'pingpong.txt')
+
+@app.get("/healthz")
+def healthz():
+    try:
+        pingpong_status = requests.get("http://ping-pong-svc:2346/healthz", timeout=2).status_code
+    except Exception:
+        return Response(status_code=500)
+    if pingpong_status == 200:
+        return Response(status_code=200)
+    return Response(status_code=500)
 
 @app.get("/")
 def root():

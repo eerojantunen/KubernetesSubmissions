@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import Response
 from random import choices
 import string
 from datetime import datetime
@@ -27,6 +28,15 @@ def handle_pingpong():
         count = result.fetchone()[0]
         conn.commit()
         return count
+
+@app.get("/healthz")
+def healthz():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text('SELECT 1'))
+        return Response(status_code=200)
+    except Exception:
+        return Response(status_code=500)
 
 @app.get("/pings")
 def pings():
