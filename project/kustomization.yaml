@@ -11,6 +11,7 @@ resources:
   - todo-backend/manifests/deployment.yaml
   - todo-backend/manifests/service.yaml
   - todo-backend/manifests/todo-cronjob.yaml
+  - todo-backend/manifests/backup-cronjob.yaml
 images:
   - name: todo-app-image
     newName: eplol/todo-app
