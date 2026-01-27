@@ -70,13 +70,10 @@ jobs:
           kubectl get services -o wide
 
 
-
-
-
   build-publish-deploy-app:
 
     environment: dev
-    
+  
     name: Build, Publish and Deploy
     runs-on: ubuntu-latest
 
