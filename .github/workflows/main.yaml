@@ -2,8 +2,6 @@ name: Release application
 
 on:
   push:
-    branches:
-        - "3.6"
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -126,15 +124,27 @@ jobs:
       - name: Deploy
         run: |-
           cd project
-          
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+
+          if [ "$BRANCH_NAME" == "main" ]; then
+            NAMESPACE="project"
+          else
+            NAMESPACE="$BRANCH_NAME"
+          fi
+
+          kubectl create namespace $NAMESPACE || true
+          kubectl config set-context --current --namespace=$NAMESPACE
+          kustomize edit set namespace $NAMESPACE
+
           TAG_BACKEND="$REGISTRY/$PROJECT_ID/$REPOSITORY/todo-backend:$BRANCH-$GITHUB_SHA"
           TAG_APP="$REGISTRY/$PROJECT_ID/$REPOSITORY/todo-app:$BRANCH-$GITHUB_SHA"
 
           kustomize edit set image todo-backend-image=$TAG_BACKEND
           kustomize edit set image todo-app-image=$TAG_APP
+          kustomize edit set namespace $NAMESPACE
           
           kustomize build . | kubectl apply -f -
           
-          kubectl rollout status deployment todo-backend -n project
-          kubectl rollout status deployment todo-app -n project
+          kubectl rollout status deployment todo-backend -n $NAMESPACE
+          kubectl rollout status deployment todo-app -n $NAMESPACE
           kubectl get services -o wide
