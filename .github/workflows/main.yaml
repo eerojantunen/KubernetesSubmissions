@@ -15,12 +15,15 @@ env:
 jobs:
   build-publish-deploy-backend:
 
+    environment: dev
+
     env:
       IMAGE: todo-backend
       SERVICE: todo-backend
 
     name: Build, Publish and Deploy
     runs-on: ubuntu-latest
+    
 
     steps:
       - name: Checkout
@@ -71,6 +74,9 @@ jobs:
 
 
   build-publish-deploy-app:
+
+    environment: dev
+    
     name: Build, Publish and Deploy
     runs-on: ubuntu-latest
 
