@@ -1,0 +1,38 @@
+name: Cleanup Environment
+
+on:
+  delete:
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+
+jobs:
+  delete-environment:
+    if: github.event.ref_type == 'branch'
+    name: delete namespace
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Check branch name
+        run: |
+          BRANCH="${{ github.event.ref }}"
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ env.PROJECT_ID }}'
+          location: '${{ env.GKE_ZONE }}'
+
+      - name: deletion
+        run: |
+          NAMESPACE="${{ github.event.ref }}"
+          kubectl delete namespace $NAMESPACE --ignore-not-found
