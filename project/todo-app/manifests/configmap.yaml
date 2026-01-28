@@ -9,3 +9,4 @@ data:
   REDIRECT_URL: /
   DB_URL: postgresql://postgres:pass123@project-postgres-svc:5432/postgres
   TODOS_HEALTH_URL: http://todo-backend-svc:2347/healthz
+  TODOS_DONE_URL: http://todo-backend-svc:2347/done

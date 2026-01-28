@@ -21,7 +21,7 @@ spec:
             claimName: project-image-claim
       containers:
         - name: todo-app
-          image: eplol/todo-app:4.1
+          image: eplol/todo-app:4.8
           volumeMounts:
           - name: shared-image
             mountPath: /mydir/shared/files
@@ -43,6 +43,11 @@ spec:
               configMapKeyRef:
                 name: project-configmap
                 key: TODOS_HEALTH_URL
+          - name: TODOS_DONE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: project-configmap
+                key: TODOS_DONE_URL
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5
