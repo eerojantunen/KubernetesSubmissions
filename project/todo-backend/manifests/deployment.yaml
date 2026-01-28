@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: eplol/todo-backend:4.2
+          image: eplol/todo-backend:4.8
           env:
           - name: PORT
             value: "8000"

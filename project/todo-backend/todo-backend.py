@@ -5,6 +5,7 @@ from fastapi.responses import RedirectResponse, Response
 from datetime import datetime
 import requests
 from sqlalchemy import create_engine, text
+import nats
 
 app = FastAPI()
 
@@ -17,6 +18,7 @@ todo_list = ["Learn JacaScript", "Learn React", "Build a project"]
 redirect_url = os.getenv("REDIRECT_URL")
 
 engine = create_engine(DB_URL)
+
 
 def init_db():
     try:
@@ -31,13 +33,17 @@ def init_db():
 
             if not exists:
                 conn.execute(text(
-                    "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT)"))
+                    "CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT, status INTEGER DEFAULT 0)"))
                 conn.commit()
                 for todo in todo_list:
                     conn.execute(
                         text("INSERT INTO todos (todo) VALUES (:todo) ON CONFLICT DO NOTHING"),
                         {"todo": todo})        
                     conn.commit()
+            conn.execute(text("""
+                ALTER TABLE todos ADD COLUMN IF NOT EXISTS status INTEGER DEFAULT 0
+            """))
+            conn.commit()
     except Exception:
         pass
 
@@ -59,13 +65,39 @@ async def root():
     return {"status": "ok"}
 
 @app.get("/todos")
-async def get_todos():
+def get_todos():
     with engine.connect() as conn:
         result = conn.execute(text(
-            "SELECT todo FROM todos ORDER BY id ASC"
+            "SELECT id, todo FROM todos WHERE status=0 ORDER BY id ASC"
+        ))
+    todos_list = [{"id": row.id, "content": row.todo} for row in result]
+    return todos_list
+
+@app.get("/done")
+def get_done():
+    with engine.connect() as conn:
+        result = conn.execute(text(
+            "SELECT todo FROM todos WHERE status=1 ORDER BY id ASC"
         ))
     todos_list = [row[0] for row in result]
     return todos_list
+
+@app.put("/todos/{target_id}/done")
+async def update_done_status(target_id):
+    with engine.connect() as conn:
+        result = conn.execute(text(
+            "UPDATE todos SET status=1 WHERE id=:target_id"
+        ), {"target_id":target_id})
+        conn.commit()
+        if result.rowcount == 0:
+            return Response(status_code=404)
+    try:
+        nc = await nats.connect("nats://my-nats:4222")
+        await nc.publish("todos", f"Todo {target_id} marked as done".encode())
+        await nc.close()
+    except Exception as e:
+        pass
+    return Response(status_code=200)
 
 @app.post("/todos")
 async def post_todos(request: Request):
@@ -83,6 +115,12 @@ async def post_todos(request: Request):
         )
         conn.commit()
     print(f"todo: {todo} added to database")
+    try:
+        nc = await nats.connect("nats://my-nats:4222")
+        await nc.publish("todos", f"Todo: {todo}".encode())
+        await nc.close()
+    except Exception as e:
+        pass
     return RedirectResponse(url=redirect_url, status_code=303)
 
 
