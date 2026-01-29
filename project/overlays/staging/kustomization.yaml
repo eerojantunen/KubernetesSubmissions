@@ -29,10 +29,10 @@ patches:
 images:
 - name: broadcaster-image
   newName: eplol/broadcaster
-  newTag: 510aad8a411042ef0dc08fee4c77951bf4a030ac
+  newTag: 966e4d50a74da48382ede4bb41046ec6e3660f05
 - name: todo-app-image
   newName: eplol/todo-app
-  newTag: 510aad8a411042ef0dc08fee4c77951bf4a030ac
+  newTag: 966e4d50a74da48382ede4bb41046ec6e3660f05
 - name: todo-backend-image
   newName: eplol/todo-backend
-  newTag: 510aad8a411042ef0dc08fee4c77951bf4a030ac
+  newTag: 966e4d50a74da48382ede4bb41046ec6e3660f05
