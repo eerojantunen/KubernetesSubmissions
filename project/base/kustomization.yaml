@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- todo-app-configmap.yaml
+- todo-backend-statefulset.yaml
+- todo-app-deployment.yaml
+- todo-app-ingress.yaml
+- todo-app-persistentvolumeclaim.yaml
+- todo-app-service.yaml
+- todo-backend-deployment.yaml
+- todo-backend-service.yaml
+- todo-backend-todo-cronjob.yaml
+- broadcaster-deployment.yaml
+- todo-backend-backup-cronjob.yaml
+
+
+#images:
+#- name: broadcaster-image
+#  newName: eplol/broadcaster
+#  newTag: d9df8ee0757a798e1e2409513778f78958a5f477
+#- name: todo-app-image
+#  newName: eplol/todo-app
+#  newTag: d9df8ee0757a798e1e2409513778f78958a5f477
+#- name: todo-backend-image
+#  newName: eplol/todo-backend
+#  newTag: d9df8ee0757a798e1e2409513778f78958a5f477

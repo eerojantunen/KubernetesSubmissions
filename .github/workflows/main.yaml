@@ -3,7 +3,9 @@ name: Build and publish application
 on:
   push:
     branches:
-        - "4.8"
+        - "4.9"
+    tags:
+        - "v*"
 
 permissions:
   contents: write
@@ -41,16 +43,21 @@ jobs:
         uses: imranismail/setup-kustomize@v2
 
       - name: Update image tags
-        run: |-
-          cd project          
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            echo "TARGET_ENV=production" >> $GITHUB_ENV
+          else
+            echo "TARGET_ENV=staging" >> $GITHUB_ENV
+          fi
+      - name: Update image tags
+        run: |
+          cd project/overlays/${{ env.TARGET_ENV }}
           kustomize edit set image todo-app-image=eplol/todo-app:$GITHUB_SHA
           kustomize edit set image todo-backend-image=eplol/todo-backend:$GITHUB_SHA
           kustomize edit set image broadcaster-image=eplol/broadcaster:$GITHUB_SHA
-          
+
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'project/kustomization.yaml'
+          add: 'project/overlays'
           message: New version released ${{ github.sha }}
-
-  

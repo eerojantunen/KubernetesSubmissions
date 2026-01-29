@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: project
+
+images:
+  - name: todo-app-image
+    newName: eplol/todo-app
+  - name: todo-backend-image
+    newName: eplol/todo-backend
+  - name: broadcaster-image
+    newName: eplol/broadcaster
