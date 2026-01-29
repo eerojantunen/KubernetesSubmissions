@@ -11,12 +11,18 @@ resources:
   - todo-backend/manifests/deployment.yaml
   - todo-backend/manifests/service.yaml
   - todo-backend/manifests/todo-cronjob.yaml
-  - todo-backend/manifests/backup-cronjob.yaml
+  #- todo-backend/manifests/backup-cronjob.yaml
+  - broadcaster/manifests/deployment.yaml
+  
 images:
   - name: todo-app-image
     newName: eplol/todo-app
-    newTag: "2.3"
+    newTag: latest
 
   - name: todo-backend-image
     newName: eplol/todo-backend
-    newTag: "2.7"
+    newTag: latest
+
+  - name: broadcaster-image
+    newName: eplol/broadcaster
+    newTag: latest

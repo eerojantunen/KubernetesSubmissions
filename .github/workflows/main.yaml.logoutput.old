@@ -3,7 +3,7 @@ name: Build and publish application
 on:
   push:
     branches:
-        - "4.8"
+        - "4.7"
 
 permissions:
   contents: write
@@ -26,31 +26,28 @@ jobs:
 
       - name: Build and publish backend
         run: |-
-          cd project
-          cd todo-backend
-          docker build --tag "eplol/todo-backend:$GITHUB_SHA" .
-          docker push "eplol/todo-backend:$GITHUB_SHA"
-          cd ../todo-app
-          docker build --tag "eplol/todo-app:$GITHUB_SHA" .
-          docker push "eplol/todo-app:$GITHUB_SHA"
-          cd ../broadcaster
-          docker build --tag "eplol/broadcaster:$GITHUB_SHA" .
-          docker push "eplol/broadcaster:$GITHUB_SHA"
+          cd log-output
+          cd log-getter
+          docker build --tag "eplol/log-getter:$GITHUB_SHA" .
+          docker push "eplol/log-getter:$GITHUB_SHA"
+          cd ..
+          cd log-writer
+          docker build --tag "eplol/log-writer:$GITHUB_SHA" .
+          docker push "eplol/log-writer:$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Update image tags
         run: |-
-          cd project          
-          kustomize edit set image todo-app-image=eplol/todo-app:$GITHUB_SHA
-          kustomize edit set image todo-backend-image=eplol/todo-backend:$GITHUB_SHA
-          kustomize edit set image broadcaster-image=eplol/broadcaster:$GITHUB_SHA
+          cd log-output          
+          kustomize edit set image log-getter-image=eplol/log-getter:$GITHUB_SHA
+          kustomize edit set image log-writer-image=eplol/log-writer:$GITHUB_SHA
           
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'project/kustomization.yaml'
+          add: 'log-output/kustomization.yaml'
           message: New version released ${{ github.sha }}
 
   

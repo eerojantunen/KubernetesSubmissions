@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: broadcaster
-          image: eplol/broadcaster:0.2
+          image: broadcaster-image
           env:
             - name: NATS_URL
               value: nats://my-nats:4222
