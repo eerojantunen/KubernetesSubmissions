@@ -115,7 +115,7 @@ def root():
                 <h2>Done</h2>
                 {get_done()}
                 
-                <p>DevOps with Kubernetes 2025 University of Helsinki</p>
+                <p>DevOps with Kubernetes 2025 University of Helsinki - gitops test =)</p>
             </body>
         </html>
         """
