@@ -2,16 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: exercises
 resources:
-  - manifests/configmap.yaml
-  - manifests/deployment.yaml
-  - manifests/persistentvolumeclaim.yaml
-  - manifests/service.yaml
-  - manifests/ingress.yaml
-images:
-  - name: log-getter-image
-    newName: eplol/log-getter
-    newTag: latest
+- manifests/configmap.yaml
+- manifests/deployment.yaml
+- manifests/persistentvolumeclaim.yaml
+- manifests/service.yaml
+- manifests/ingress.yaml
 
-  - name: log-writer-image
-    newName: eplol/log-writer
-    newTag: latest
+images:
+- name: log-getter-image
+  newName: eplol/log-getter
+  newTag: 64e8d9250cf3dd570a6a1d48c16da2476390fc46
+- name: log-writer-image
+  newName: eplol/log-writer
+  newTag: 64e8d9250cf3dd570a6a1d48c16da2476390fc46
