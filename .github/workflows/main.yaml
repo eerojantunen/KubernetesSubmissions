@@ -8,6 +8,7 @@ jobs:
   build-publish-getter:
     name: Build, Push, Release
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
       - name: Checkout
