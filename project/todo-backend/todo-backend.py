@@ -116,7 +116,7 @@ async def post_todos(request: Request):
         conn.commit()
     print(f"todo: {todo} added to database")
     try:
-        nc = await nats.connect("nats://my-nats:4222")
+        nc = await nats.connect("nats://my-nats.default.svc.cluster.local:4222")
         await nc.publish("todos", f"Todo: {todo}".encode())
         await nc.close()
     except Exception as e:
