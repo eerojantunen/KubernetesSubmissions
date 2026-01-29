@@ -11,7 +11,7 @@ resources:
 images:
 - name: log-getter-image
   newName: eplol/log-getter
-  newTag: 64e8d9250cf3dd570a6a1d48c16da2476390fc46
+  newTag: 111add45bfcbc3f5dd47c1b7e7c053e76f1004eb
 - name: log-writer-image
   newName: eplol/log-writer
-  newTag: 64e8d9250cf3dd570a6a1d48c16da2476390fc46
+  newTag: 111add45bfcbc3f5dd47c1b7e7c053e76f1004eb
