@@ -92,7 +92,7 @@ async def update_done_status(target_id):
         if result.rowcount == 0:
             return Response(status_code=404)
     try:
-        nc = await nats.connect("nats://my-nats:4222")
+        nc = await nats.connect("nats://my-nats.default.svc.cluster.local:4222")
         await nc.publish("todos", f"Todo {target_id} marked as done".encode())
         await nc.close()
     except Exception as e:
