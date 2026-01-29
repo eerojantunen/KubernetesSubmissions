@@ -39,6 +39,7 @@ def status():
                  f"env variable: MESSAGE={env_message}\n"
                  f"{content}\n"
                  f"Ping / Pongs: {pong}"
+                 f"gitops test"
         )
         return result
     except Exception as e:
