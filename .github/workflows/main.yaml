@@ -4,6 +4,10 @@ on:
   push:
     branches:
         - "4.7"
+
+permissions:
+  contents: write
+  
 jobs:
   build-publish-getter:
     name: Build, Push, Release
