@@ -19,10 +19,10 @@ resources:
 images:
 - name: broadcaster-image
   newName: eplol/broadcaster
-  newTag: d9df8ee0757a798e1e2409513778f78958a5f477
+  newTag: a4da34598ccc9cf6f4e420fe0114279c1bccd20d
 - name: todo-app-image
   newName: eplol/todo-app
-  newTag: d9df8ee0757a798e1e2409513778f78958a5f477
+  newTag: a4da34598ccc9cf6f4e420fe0114279c1bccd20d
 - name: todo-backend-image
   newName: eplol/todo-backend
-  newTag: d9df8ee0757a798e1e2409513778f78958a5f477
+  newTag: a4da34598ccc9cf6f4e420fe0114279c1bccd20d
