@@ -49,9 +49,18 @@ jobs:
           else
             echo "TARGET_ENV=staging" >> $GITHUB_ENV
           fi
+      
+
+      - name: Checkout Config Repo
+        uses: actions/checkout@v4
+        with:
+          repository: eerojantunen/Kubernetescourse-config
+          token: ${{ secrets.CONFIG_TOKEN }}
+          path: config-temp
+
       - name: Update image tags
         run: |
-          cd project/overlays/${{ env.TARGET_ENV }}
+          cd config-temp/project/overlays/${{ env.TARGET_ENV }}
           kustomize edit set image todo-app-image=eplol/todo-app:$GITHUB_SHA
           kustomize edit set image todo-backend-image=eplol/todo-backend:$GITHUB_SHA
           kustomize edit set image broadcaster-image=eplol/broadcaster:$GITHUB_SHA
@@ -59,6 +68,8 @@ jobs:
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
+          cwd: './config-temp'
           add: 'project/overlays'
-          push: origin HEAD:main
           message: New version released ${{ github.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CONFIG_TOKEN }}
