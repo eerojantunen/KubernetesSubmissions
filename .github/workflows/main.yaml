@@ -60,5 +60,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: 'project/overlays'
-          branch: main
+          push: origin HEAD:main
           message: New version released ${{ github.sha }}
