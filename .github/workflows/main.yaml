@@ -3,7 +3,7 @@ name: Build and publish application
 on:
   push:
     branches:
-        - "4.9"
+        - "main"
     tags:
         - "*"
 
@@ -60,4 +60,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: 'project/overlays'
+          branch: main
           message: New version released ${{ github.sha }}
