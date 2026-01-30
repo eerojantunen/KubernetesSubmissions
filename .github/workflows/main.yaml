@@ -5,7 +5,7 @@ on:
     branches:
         - "4.9"
     tags:
-        - "v*"
+        - "*"
 
 permissions:
   contents: write
