@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: backup-cronjob
-  namespace: project
+  namespace: production
 spec:
   schedule: "0 0 * * *"
   jobTemplate:
