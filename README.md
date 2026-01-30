@@ -1,99 +1,54 @@
-# KubernetesSubmissions
-devops with kubernetes course submissions
+DBaaS vs DIY pros and cons comparison:
 
-Submissions:
+Initialization:
+	DBaaS
+		Pros:
+Very easy and fast to setup
+Low initial cost
+		Cons:
+Choices about versions / extensions might be limited by provider
+	DIY
+		Pros:
+Total control of versions / extensions
+		Cons:
+Time consuming to setup
+Time consuming to connect
 
-Part 1:
+Cost:
+	DBaaS
+		Pros:
+Low initial cost
+Predictable costs
+		Cons:
+Hourly costs can be quite high
+	DIY
+		Pros
+Costs are low. 
+Uses cluster resources, if cluster has spare capacity will be free
+		Cons
+Cluster resources might have to be bigger leading to increased costs
 
-[1.1](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.1/)
+Maintanance:
+	DBaaS
+		Pros:
+Automated, very easy
+		Cons:
+Less flexibility
+Changing providers might be hard due to vendor lock in
+	DIY
+		Pros
+Very flexible
+		Cons
+Time consuming
 
-[1.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.2/)
-
-[1.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.3/)
-
-[1.4](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.4/)
-
-[1.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.5/)
-
-[1.6](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.6/)
-
-[1.7](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.7/)
-
-[1.8](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.8/)
-
-[1.9](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.9/)
-
-[1.10](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.10/)
-
-[1.11](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.11/)
-
-[1.12](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.12/)
-
-[1.13](https://github.com/eerojantunen/KubernetesSubmissions/tree/1.13/)
-
-
-
-Part 2:
-
-[2.1](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.1/)
-
-[2.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.2/)
-
-[2.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.3/)
-
-[2.4](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.4/)
-
-[2.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.5/)
-
-[2.6](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.6/)
-
-[2.7](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.7/)
-
-[2.8](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.8/)
-
-[2.9](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.9/)
-
-[2.10](https://github.com/eerojantunen/KubernetesSubmissions/tree/2.10/)
-
-
-Part 3:
-
-[3.1](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.1/)
-
-[3.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.2/)
-
-[3.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.3/)
-
-[3.4](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.4/)
-
-[3.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.5/)
-
-[3.6](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.6/)
-
-[3.7](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.7/)
-
-[3.8](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.8/)
-
-[3.10](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.10/)
-
-[3.11](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.11/)
-
-[3.12](https://github.com/eerojantunen/KubernetesSubmissions/tree/3.12/)
-
-Part 4:
-
-[4.1](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.1/)
-
-[4.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.2/)
-
-[4.3](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.3/)
-
-[4.4](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.4/)
-
-[4.5](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.5/)
-
-[4.6](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.6/)
-
-[4.7](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.7/)
-
-[4.8](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.8/)
+Backups:
+	DBaaS
+		Pros:
+Very easy, built in
+		Cons:
+Less flexibility
+	DIY
+		Pros
+Can be done exactly how needed
+		Cons
+Time consuming. Requires manual configuring.
