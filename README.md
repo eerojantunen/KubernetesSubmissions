@@ -102,3 +102,6 @@ Part 4:
 
 [4.10](https://github.com/eerojantunen/KubernetesSubmissions/tree/4.10/) config [HERE](https://github.com/eerojantunen/Kubernetescourse-config)
 
+Part 5
+
+[5.2](https://github.com/eerojantunen/KubernetesSubmissions/tree/5.2/)
